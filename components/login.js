@@ -3,7 +3,6 @@ import { Alert, Container, Form, Button, Toast } from 'react-bootstrap'
 import Head from 'next/head'
 import { useAuth } from '@context/user'
 import styles from './login.module.css'
-// import { Alert } from 'bootstrap'
 
 export default function LoginForm() {
 
