@@ -1,52 +1,66 @@
-import { useState } from 'react'
-import { Container, Form, Button, Toast } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import { Alert, Container, Form, Button, Toast } from 'react-bootstrap'
+import Head from 'next/head'
 import { useAuth } from '@context/user'
-import styes from './login.module.css'
+import styles from './login.module.css'
+// import { Alert } from 'bootstrap'
 
 export default function LoginForm() {
 
-    const [email, setEmail] = useState('ojericsson@gmail.com')
-    const [pass, setPass] = useState('daniel16')
-    const [any_error, setError] = useState(false)
+    // Input elements should have autocomplete attributes
+    // https://goo.gl/9p2vKq
+
+    // Add class to body in React
+    // https://brettdewoody.com/modifying-body-attributes-in-react/
+    // https://stackoverflow.com/questions/37641996/react-routes-different-styling-on-body-css-tag
 
     const auth = useAuth()
+    const [errorMessage, setErrorMessage] = useState('')
 
-    function loginFormSubmitted(e) {
+    const loginFormSubmitted = e => {
         e.preventDefault()
         const form = e.currentTarget
-
+        console.log('LOGIN')
         auth.signInWithEmailAndPassword(form.email.value, form.password.value)
-            .catch(setError)
+            .catch(e => {
+                setErrorMessage(e.message)
+            })
     }
 
+    useEffect(() => {
+        document.body.className = styles.body
+        document.body.parentNode.className = styles.html
+    }, [])
+
     return (
-        <main className="form-signin">
-            <Container className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <>
+            <Head>
+                <title>Login</title>
+            </Head>
+            <main className={styles.formSignin}>
                 <Form onSubmit={loginFormSubmitted}>
 
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control name="email" type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+                        <Form.Control name="email" type="email" placeholder="Enter email" autoComplete="username" required />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control name="password" type="password" placeholder="Password" value={pass} onChange={e => setPass(e.target.value)} />
+                        <Form.Control name="password" type="password" placeholder="Password" autoComplete="current-password" required />
                     </Form.Group>
 
-                    <Toast onClose={() => setError(false)} show={any_error} delay={3000} autohide>
-                        <Toast.Header >
-                            <strong className="mr-auto">Bootstrap</strong>
-                            <small>11 mins ago</small>
-                        </Toast.Header>
-                        <Toast.Body>Hello, world! This is a toast message.</Toast.Body>
+                    <Toast onClose={() => setErrorMessage('')} show={errorMessage!=''} delay={3000} autohide>
+                        <Alert variant="danger">
+                            {errorMessage}
+                        </Alert>
                     </Toast>
 
                     <Button variant="outline-success" type="submit" className="w-100 btn-lg">
-                        Submit
+                        Login
                     </Button>
                 </Form>
-            </Container>
-        </main>
+            </main>
+        </>
     )
 }
