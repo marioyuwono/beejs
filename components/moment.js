@@ -1,6 +1,6 @@
 import Moment from 'react-moment'
 
-export default function M({ children, format}) {
+export default function Format({ children, format}) {
 
     if (children==null) {
         return ''

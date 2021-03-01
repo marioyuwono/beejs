@@ -7,7 +7,7 @@ import { Button, Form, Table } from 'react-bootstrap'
 // import Moment from 'react-moment'
 
 import Layout from "@components/layout"
-import Moment from "@components/Moment"
+import Moment from "@components/moment"
 import { useAuth } from "@context/user"
 
 const Db =  firebase.firestore()
@@ -32,6 +32,8 @@ function AccountsTable({ _, edit_mode }) {
     useEffect(() => {
         Db.collection('accounts')
             .where('i', '==', auth.user.uid)
+            // .orderBy('o')
+            // .orderBy('a')
             .get()
             .then(snapshot => {
                 let accounts = []
@@ -48,7 +50,7 @@ function AccountsTable({ _, edit_mode }) {
             })
     }, [])
 
-    useEffect(() => {        
+    useEffect(() => {
         if (!edit_mode) {
             setSaveMessage('')
         }
