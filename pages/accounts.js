@@ -32,8 +32,8 @@ function AccountsTable({ _, edit_mode }) {
     useEffect(() => {
         Db.collection('accounts')
             .where('i', '==', auth.user.uid)
-            // .orderBy('o')
-            // .orderBy('a')
+            .orderBy('o')
+            .orderBy('a')
             .get()
             .then(snapshot => {
                 let accounts = []
