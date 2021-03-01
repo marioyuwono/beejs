@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter }  from 'next/router';
 import { useEffect, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
+import Moment from 'react-moment'
 
 import Layout from "@components/layout"
 import { useAuth } from "@context/user"
@@ -109,6 +110,8 @@ function AccountsTable({ _, edit_mode }) {
         })
     }
 
+    console.debug('AccountsTable.data:', data)
+
     return data
         ? (
             <Form onSubmit={save}>
@@ -117,41 +120,68 @@ function AccountsTable({ _, edit_mode }) {
                         <tr>
                             <th>Account</th>
                             <th>EA</th>
+                            <th>Expiry</th>
                         </tr>
                     </thead>
-                    <tbody>{
+                    <tbody>
+                    {
                         // Error warning: a list should have a unique "key" prop.
                         // https://reactjs.org/docs/lists-and-keys.html#keys
                         data.map(row => (
                             <tr key={row.id}>
-                                <td>{edit_mode
-                                    ? <Form.Control name="accounts" aria-label={row.id} placeholder={row.a} onFocus={populate} onBlur={clear}/>
-                                    : row.a }</td>
+                                <td>
+                                {
+                                    edit_mode
+                                        ? <Form.Control
+                                            name="accounts"
+                                            aria-label={row.id}
+                                            placeholder={row.a}
+                                            onFocus={populate}
+                                            onBlur={clear} />
+                                        : row.a
+                                }
+                                </td>
                                 <td>{row.o}</td>
+                                <td>
+                                {
+                                    typeof row.x == 'object'
+                                        && (
+                                            <Moment format="D MMM YYYY">
+                                                {new Date(row.x.seconds * 1000)}
+                                            </Moment>
+                                        )
+                                }
+                                </td>
                             </tr>
                         ))
-                    }</tbody>
-                    {saveMessage &&
-                        <tbody>
-                            <tr>
-                                <td colSpan="2">{saveMessage}</td>
-                            </tr>
-                        </tbody>}
-                    <tbody>
-                        <tr>
-                            <td colSpan="2" className="text-right">
-                                {edit_mode
-                                ? (<>
-                                    <Link href="accounts">
-                                        <Button variant="outline-dark" onClick={e => router.push('accounts')}>Cancel</Button>
+                    }
+                    {
+                        saveMessage.length > 0
+                            && (
+                                <tr>
+                                    <td colSpan="3">{saveMessage}</td>
+                                </tr>
+                            )
+                    }
+                    <tr>
+                        <td colSpan="3" className="text-right">
+                        {
+                            edit_mode
+                                ? (
+                                    <>
+                                        <Link href="accounts">
+                                            <Button variant="outline-dark" onClick={e => router.push('accounts')}>Cancel</Button>
+                                        </Link>
+                                        <Button variant="success" type="submit" className="ml-2">Save</Button>
+                                    </>
+                                ) : (
+                                    <Link href="?edit">
+                                        <Button variant="outline-danger">Edit</Button>
                                     </Link>
-                                    <Button variant="success" type="submit" className="ml-2">Save</Button>
-                                </>)
-                                : <Link href="?edit">
-                                    <Button variant="outline-danger">Edit</Button>
-                                </Link>}
-                            </td>
-                        </tr>
+                                )
+                        }
+                        </td>
+                    </tr>
                     </tbody>
                 </Table>
             </Form>

@@ -14,19 +14,23 @@ const MainNavs = [
 export default function Layout({ children, requires_auth }) {
     const auth = useAuth()
 
-    if (requires_auth && !auth.user) {
-        return (
-            <LoginForm />
-        )
+    if (requires_auth) {
+        if (auth.user) {
+            return (
+                <NavBarFixed>
+                    <Head>
+                        <title>Bee</title>
+                    </Head>
+                    {children}
+                </NavBarFixed>
+            )
+        } else {
+            return (
+                <LoginForm />
+            )
+        }
     } else {
-        return (
-            <NavBarFixed>
-                <Head>
-                    <title>Bee</title>
-                </Head>
-                {children}
-            </NavBarFixed>
-        )
+        // TODO
     }
 }
 
@@ -51,6 +55,13 @@ function NavBarFixed({ children }) {
                     ))
                 }
                 <Navbar.Collapse id="navbarCollapse" className="justify-content-end">
+                    <Nav.Item>
+                        <Nav.Link eventKey="disabled" disabled>
+                            Hi {
+                                auth.user.displayName
+                            }
+                        </Nav.Link>
+                    </Nav.Item>
                     <Button variant="outline-danger" onClick={ () => auth.signOut() }>Logout</Button>
                 </Navbar.Collapse>
             </Navbar>

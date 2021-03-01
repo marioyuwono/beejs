@@ -58,6 +58,7 @@ function useProvideAuth() {
     useEffect(() => {
         const unsubscribe = firebase.auth().onAuthStateChanged(function (u) {
             if (u) {
+                console.debug('useProvideAuth.user:', u)
                 setUser(u)
                 u.getIdToken().then(setIdToken)
             } else {
