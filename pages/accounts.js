@@ -4,9 +4,10 @@ import Link from 'next/link'
 import { useRouter }  from 'next/router';
 import { useEffect, useState } from 'react'
 import { Button, Form, Table } from 'react-bootstrap'
-import Moment from 'react-moment'
+// import Moment from 'react-moment'
 
 import Layout from "@components/layout"
+import Moment from "@components/Moment"
 import { useAuth } from "@context/user"
 
 const Db =  firebase.firestore()
@@ -143,14 +144,7 @@ function AccountsTable({ _, edit_mode }) {
                                 </td>
                                 <td>{row.o}</td>
                                 <td>
-                                {
-                                    typeof row.x == 'object'
-                                        && (
-                                            <Moment format="D MMM YYYY">
-                                                {new Date(row.x.seconds * 1000)}
-                                            </Moment>
-                                        )
-                                }
+                                    <Moment format="D MMM YYYY">{row.x}</Moment>
                                 </td>
                             </tr>
                         ))
