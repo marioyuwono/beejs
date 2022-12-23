@@ -48,8 +48,8 @@ function NavBarFixed({ children }) {
                 {
                     MainNavs.map(([href, text], i) => (
                         <Nav.Item key={i}>
-                        <Link href={href} aria-current="page">
-                            <a className="nav-link">{text}</a>
+                        <Link href={href} aria-current="page" className="nav-link">
+                            {text}
                         </Link>
                         </Nav.Item>
                     ))

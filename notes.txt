@@ -33,3 +33,9 @@ Doesn't work:
 https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
 
 -----
+
+Unhandled Runtime Error
+Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehavior>.
+Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+Solution:
+https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
