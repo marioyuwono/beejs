@@ -1,0 +1,35 @@
+Error [ERR_PACKAGE_PATH_NOT_EXPORTED]: Package subpath './lib/parser' is not defined by "exports" in C:\Users\mario\Documents\git\beejs\node_modules\postcss\package.json
+    at new NodeError (node:internal/errors:393:5)
+    at throwExportsNotFound (node:internal/modules/esm/resolve:358:9)
+    at packageExportsResolve (node:internal/modules/esm/resolve:668:3)
+    at resolveExports (node:internal/modules/cjs/loader:529:36)
+    at Module._findPath (node:internal/modules/cjs/loader:569:31)
+    at Module._resolveFilename (node:internal/modules/cjs/loader:981:27)
+    at Module._load (node:internal/modules/cjs/loader:841:27)
+    at Module.require (node:internal/modules/cjs/loader:1061:19)
+    at require (node:internal/modules/cjs/helpers:103:18)
+    at 552 (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:11590)
+    at __nccwpck_require__ (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:11735)
+    at 270 (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:400)
+    at __nccwpck_require__ (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:11735)
+    at 327 (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:260)
+    at __nccwpck_require__ (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:11735)
+    at 845 (C:\Users\mario\Documents\git\beejs\node_modules\next\dist\compiled\postcss-scss\scss-syntax.js:1:3733) {
+  code: 'ERR_PACKAGE_PATH_NOT_EXPORTED'
+}
+Solution:
+    npm update
+https://stackoverflow.com/questions/62246824/error-err-package-path-not-exported-no-exports-main-resolved-in-app-node-m
+
+-----
+
+Error: Next.js requires react >= 18.2.0 to be installed.
+Solution:
+    npm i next@latest react@latest react-dom@latest eslint-config-next@latest
+https://nextjs.org/docs/upgrading
+
+Doesn't work:
+    npm install react react-dom
+https://reactjs.org/blog/2022/03/08/react-18-upgrade-guide.html
+
+-----
