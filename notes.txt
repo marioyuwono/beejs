@@ -39,3 +39,10 @@ Error: Invalid <Link> with <a> child. Please remove <a> or use <Link legacyBehav
 Learn more: https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
 Solution:
 https://nextjs.org/docs/messages/invalid-new-link-with-extra-anchor
+
+-----
+
+Install Service Worker into Nextjs
+https://dev.to/josedonato/adding-a-service-worker-into-your-next-js-application-1dib
+
+-----
